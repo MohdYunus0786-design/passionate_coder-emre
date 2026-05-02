@@ -1,1 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMI Calculator</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+    }
+    .container {
+        background: white;
+        padding: 25px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
+        width: 320px;
+    }
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+    input {
+        width: 100%;
+        padding: 10px;
+        margin: 8px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+    button {
+        width: 100%;
+        padding: 10px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background: #218838;
+    }
+    .result {
+        margin-top: 15px;
+        padding: 10px;
+        background: #e9ecef;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+    }
+</style>
+</head>
+<body>
 
+<div class="container">
+    <h2>EMI Calculator</h2>
+
+    <input type="number" id="loanAmount" placeholder="Loan Amount">
+    <input type="number" id="interestRate" placeholder="Annual Interest Rate (%)">
+    <input type="number" id="loanTenure" placeholder="Loan Tenure (Months)">
+
+    <button onclick="calculateEMI()">Calculate EMI</button>
+
+    <div class="result" id="result">Your EMI will appear here</div>
+</div>
+
+<script>
+function calculateEMI() {
+    let P = document.getElementById("loanAmount").value;
+    let annualRate = document.getElementById("interestRate").value;
+    let N = document.getElementById("loanTenure").value;
+
+    let R = annualRate / 12 / 100;
+
+    let EMI = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
+
+    if (EMI) {
+        document.getElementById("result").innerHTML = 
+            "Monthly EMI: ₹" + EMI.toFixed(2);
+    } else {
+        document.getElementById("result").innerHTML = 
+            "Please enter valid values";
+    }
+}
+</script>
+
+</body>
+</html>
